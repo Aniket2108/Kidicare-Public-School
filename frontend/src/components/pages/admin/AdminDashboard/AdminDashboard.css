@@ -1,0 +1,54 @@
+/* Make Drawer Responsive */
+@media (max-width: 960px) {
+    .drawerStyled {
+        width: 200px;
+    }
+    .hideDrawer {
+        display: flex;
+    }
+}
+
+/* Media Queries for Mobile View */
+@media (max-width: 600px) {
+    .MuiAppBar-root {
+        padding-left: 0;
+    }
+
+    .drawerStyled {
+        width: 100%;
+        display: none;  /* Hidden drawer on small screens */
+    }
+
+    .hideDrawer {
+        display: block;  /* Only show on small screens */
+    }
+
+    .MuiListItemButton-root {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .MuiListItemText-primary {
+        font-size: 0.9rem;
+    }
+
+    /* Adjust AppBar Icon for smaller devices */
+    .MuiIconButton-root {
+        font-size: 1.5rem;  /* Reduce size of menu icon for smaller screens */
+    }
+}
+
+/* For larger screens, we keep the Drawer expanded and MenuIcon hidden */
+@media (min-width: 960px) {
+    .MuiIconButton-root {
+        display: none;  /* Hide the menu icon on larger screens */
+    }
+
+    .MuiDrawer-root {
+        width: 240px;
+    }
+
+    .boxStyled {
+        padding-left: 240px; /* To make space for the sidebar */
+    }
+}

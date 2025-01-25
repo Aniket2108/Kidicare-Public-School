@@ -1,0 +1,149 @@
+/* Sidebar Styles */
+
+/* Main Sidebar Container */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;  /* Smooth transition when sliding in */
+}
+
+/* Default Icon Style */
+.sidebar-icon {
+    color: inherit;
+}
+
+/* Active State Icon Style */
+.sidebar-icon.active {
+    color: #1976d2; /* Primary color for active items */
+}
+
+/* Adjust Divider Style */
+.MuiDivider-root {
+    margin: 10px 0;
+}
+
+/* Styles for the ListItemButton component (for spacing, alignment, etc.) */
+.MuiListItemButton-root {
+    padding: 10px 15px;
+}
+
+/* Styles for the ListSubheader */
+.MuiListSubheader-root {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.54); /* Adjust the color of subheader */
+    padding-left: 25px; /* Add left padding for subheader */
+}
+
+/* Hover effect for ListItemButton */
+.MuiListItemButton-root:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Ensure ListItemButton has the correct padding */
+.MuiListItemButton-root.Mui-selected {
+    background-color: rgba(25, 118, 210, 0.12);
+}
+
+/* Active State Text Style for List Items */
+.MuiListItemText-root.MuiTypography-root.MuiTypography-body1 {
+    font-weight: 500;
+}
+
+/* SideBar section for User Profile, Logout styling */
+.MuiListItemButton-root.Mui-selected {
+    background-color: rgba(25, 118, 210, 0.12);
+}
+
+/* Custom Styling for specific items when active */
+.MuiListItemButton-root.Mui-selected .MuiListItemText-primary {
+    color: #1976d2;
+}
+
+/* Responsive Styles */
+
+/* For medium screens like tablets and up (e.g., 960px and below) */
+@media (max-width: 960px) {
+    /* Sidebar on mobile/tablet screen size */
+    .sidebar {
+        width: 100%;
+        padding: 5px 10px;
+    }
+
+    /* Adjust icon size on smaller screens */
+    .sidebar-icon {
+        font-size: 1.5rem;
+    }
+
+    .MuiListItemButton-root {
+        padding: 8px 10px;  /* Reduce padding for smaller screens */
+    }
+
+    /* Adjust subheader font size */
+    .MuiListSubheader-root {
+        font-size: 1rem;
+        padding-left: 15px; /* Reduce padding on smaller screens */
+    }
+
+    .MuiListItemButton-root:hover {
+        background-color: rgba(0, 0, 0, 0.1); /* Lighter hover on small screens */
+    }
+
+    /* Mobile specific active state colors */
+    .MuiListItemButton-root.Mui-selected .MuiListItemText-primary {
+        color: #1976d2; /* Ensure the active color stands out */
+    }
+}
+
+/* For smaller screens (e.g., 600px and below) */
+@media (max-width: 600px) {
+    .sidebar {
+        width: 100%;
+        padding: 5px;
+        display: none;  /* Hide sidebar by default on small screens */
+        position: absolute;
+        left: -100%;  /* Sidebar starts off-screen */
+    }
+
+    .sidebar.open {
+        display: block; /* Show the sidebar when open */
+        transform: translateX(0);  /* Slide the sidebar in */
+        left: 0;  /* Ensure it's aligned to the left */
+    }
+
+    /* Adjust icon size further for small screens */
+    .sidebar-icon {
+        font-size: 1.3rem;
+    }
+
+    .MuiListItemButton-root {
+        padding: 8px 10px;
+        font-size: 0.9rem; /* Make text a little smaller for small screens */
+    }
+
+    .MuiListSubheader-root {
+        font-size: 0.9rem;
+    }
+
+    /* Opened Sidebar (e.g., slide-in effect) */
+    .sidebar.open {
+        display: block;
+        animation: slideIn 0.3s ease-out;
+    }
+
+    /* Slide-in animation */
+    @keyframes slideIn {
+        from {
+            left: -250px;
+        }
+        to {
+            left: 0;
+        }
+    }
+
+    /* Make the logout button stand out more on mobile */
+    .MuiListItemButton-root.Mui-selected .MuiListItemText-primary {
+        font-weight: bold;
+    }
+}

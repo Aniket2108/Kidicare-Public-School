@@ -1,0 +1,95 @@
+/* Homepage.css */
+.homepage-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.students-image {
+    width: 100%;
+    object-fit: cover;
+}
+
+.styled-paper {
+    padding: 24px;
+    height: 100vh;
+}
+
+.styled-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+}
+
+.styled-title {
+    font-size: 3rem;
+    color: #252525;
+    font-weight: bold;
+    padding-top: 0;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: center;
+}
+
+.styled-text {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.styled-link {
+    text-decoration: none;
+}
+
+.signup-link {
+    color: #550080;
+    text-decoration: none;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .styled-title {
+        font-size: 2rem;
+    }
+
+    .styled-text {
+        font-size: 0.875rem;
+    }
+
+    .styled-paper {
+        padding: 16px;
+    }
+
+    .students-image {
+        height: auto;
+    }
+
+    .styled-box {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .styled-title {
+        font-size: 1.5rem;
+    }
+
+    .styled-text {
+        font-size: 0.75rem;
+    }
+
+    .styled-paper {
+        padding: 12px;
+    }
+
+    .students-image {
+        height: 250px;
+    }
+}

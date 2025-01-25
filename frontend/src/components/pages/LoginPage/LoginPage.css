@@ -1,0 +1,101 @@
+/* LoginPage.css */
+
+/* Base styles for the layout */
+.login-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-box {
+    margin-top: 8%;
+    margin-left: 4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-title {
+    margin-bottom: 2rem;
+    color: #2c2143;
+    font-size: 2rem;
+}
+
+.login-form {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 400px; /* Limits form width */
+}
+
+/* Background image styles */
+.bg-image {
+    background-image: url("../../../assets/designlogin.jpg");
+    background-repeat: no-repeat;
+    background-color: gray;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+}
+
+/* Form input fields */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"] {
+    font-size: 1rem;
+}
+
+/* Responsive Styles */
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+    .form-box {
+        margin-top: 5%;
+        margin-left: 2%;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .login-form {
+        width: 90%;
+    }
+
+    .bg-image {
+        background-position: center center;
+        height: 40%;
+    }
+}
+
+/* Small screens (mobile devices) */
+@media (max-width: 480px) {
+    .form-title {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .login-form {
+        width: 100%;
+    }
+
+    .bg-image {
+        background-position: center center;
+        height: 50%;
+    }
+
+    .login-page {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .form-box {
+        margin-top: 4%;
+        margin-left: 2%;
+    }
+
+    .form-title {
+        margin-bottom: 1.5rem;
+    }
+}
