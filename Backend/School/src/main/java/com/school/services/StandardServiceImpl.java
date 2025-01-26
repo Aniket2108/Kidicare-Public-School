@@ -1,12 +1,15 @@
 package com.school.services;
 
 import com.school.dto.StandardDTO;
+import com.school.dto.StandardResponseDTO;
 import com.school.entities.Standard;
 import com.school.mapper.StandardMapper;
 import com.school.repository.StandardRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StandardServiceImpl implements StandardService {
@@ -26,6 +29,23 @@ public class StandardServiceImpl implements StandardService {
 
         Standard standardEntity = mapper.map(standardDTO,Standard.class);
 
-        return standardMapper.mapToStandardDTO(standardRepository.save(standardEntity));
+        List<Standard> standards = standardRepository.findAll();
+
+        for(Standard s:standards){
+            if(s.getName().equalsIgnoreCase(standardEntity.getName())){
+                return null;
+            }
+        }
+
+        return standardMapper.mapStandardToDTO(standardRepository.save(standardEntity));
+
+    }
+
+    @Override
+    public List<StandardResponseDTO> getAllStandards() {
+
+        List<Standard> standards = standardRepository.findAll();
+
+        return standardMapper.standardToStandardResponseDTO(standards);
     }
 }

@@ -6,19 +6,19 @@ import './LoginPage.css';
 import bgpic from "../../../assets/designlogin.jpg";
 import axios from "axios";
 import { serverUrl } from "../../data/Data";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
-const LoginPage = ({ role }) => {
+const LoginPage = ({ role, setCurrentRole }) => {
     const [toggle, setToggle] = useState(false);
     const [loader, setLoader] = useState(false);
     const [formData, setFormData] = useState({
         emailId: "",
         password: "",
     });
-    const [error, setError] = useState(""); // State to hold error message
-    const navigate = useNavigate(); // Initialize navigate
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     // Handle input change to update state
     const handleChange = (e) => {
@@ -42,19 +42,27 @@ const LoginPage = ({ role }) => {
                 `${serverUrl}/${roleHeader}/login`, 
                 formData
             );
-            if( response.status === 200){
+
+            if (response.status === 200) {
                 setError(""); 
-                if (role === 'Admin') {
-                    navigate('/Admin/dashboard'); 
-                }
-                else if (role === 'Student') {
-                    navigate('/Student/dashboard'); 
-                } else if (role === 'Teacher') {
-                    navigate('/Teacher/dashboard'); 
+                setCurrentRole(role);  // Set current role using useState prop
+
+                switch (role) {
+                    case 'Admin':
+                        navigate('/Admin/dashboard');
+                        break;
+                    case 'Student':
+                        navigate('/Student/dashboard');
+                        break;
+                    case 'Teacher':
+                        navigate('/Teacher/dashboard');
+                        break;
+                    default:
+                        break;
                 }
             }
         } catch (error) {
-            setError("Incorrect credentials. Please try again."); // Set error message
+            setError("Incorrect credentials. Please try again.");
         } finally {
             setLoader(false);
         }
@@ -102,7 +110,6 @@ const LoginPage = ({ role }) => {
                                         label="Enter your name"
                                         name="studentName"
                                         autoComplete="name"
-                                        autoFocus
                                     />
                                 </>
                             ) : (
@@ -116,7 +123,7 @@ const LoginPage = ({ role }) => {
                                     autoComplete="email"
                                     autoFocus
                                     value={formData.emailId}
-                                    onChange={handleChange} // Handle email input change
+                                    onChange={handleChange}
                                 />
                             )}
                             <TextField
@@ -129,7 +136,7 @@ const LoginPage = ({ role }) => {
                                 id="password"
                                 autoComplete="current-password"
                                 value={formData.password}
-                                onChange={handleChange} // Handle password input change
+                                onChange={handleChange}
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">

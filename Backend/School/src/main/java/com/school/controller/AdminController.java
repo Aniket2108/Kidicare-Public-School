@@ -87,7 +87,19 @@ public class AdminController {
 
     @PostMapping(value = "/class")
     public ResponseEntity<?> addStandard(@RequestBody StandardDTO standardDTO){
-        return ResponseEntity.status(HttpStatus.CREATED).body(standardService.addStandard(standardDTO));
+
+        Object entity = standardService.addStandard(standardDTO);
+
+        if(entity == null){
+           return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(entity);
+    }
+
+    @GetMapping(value = "/class")
+    public ResponseEntity<?> getAllStandards(){
+        return ResponseEntity.status(HttpStatus.OK).body(standardService.getAllStandards());
     }
 
 }

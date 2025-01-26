@@ -1,0 +1,60 @@
+/* General container styles */
+.container {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+/* Card styling */
+.card {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Image styling */
+.image {
+    width: 50px;
+    height: 50px;
+}
+
+/* Title styling */
+.title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* Data styling (CountUp component) */
+.data {
+    font-size: calc(1.3rem + 0.6vw);
+    color: green;
+}
+
+/* Notice section styling */
+.notice {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        height: 180px;
+    }
+    .image {
+        width: 40px;
+        height: 40px;
+    }
+    .title {
+        font-size: 1.1rem;
+    }
+    .data {
+        font-size: calc(1rem + 0.4vw);
+    }
+}

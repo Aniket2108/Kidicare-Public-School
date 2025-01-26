@@ -15,13 +15,13 @@ public class StudentMapper {
         List<StudentDTO> studentDTOList = new ArrayList<>();
 
         for (Student student : students) {
-            studentDTOList.add(mapUserToDTO(student));
+            studentDTOList.add(mapStudentToDTO(student));
         }
 
         return studentDTOList;
     }
 
-    public StudentDTO mapUserToDTO(Student student){
+    public StudentDTO mapStudentToDTO(Student student){
         StudentDTO studentDTO = new StudentDTO();
 
         studentDTO.setFirstName(student.getFirstName());

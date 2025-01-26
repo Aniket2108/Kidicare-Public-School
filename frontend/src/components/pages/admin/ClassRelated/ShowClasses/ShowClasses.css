@@ -1,0 +1,52 @@
+/* ShowClasses.css */
+
+/* Main container */
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .button-container {
+      flex-direction: column;
+      gap: 1rem;
+  }
+
+  .MuiButtonBase-root {
+      margin-top: 10px;
+  }
+}
+
+/* Popup Styling */
+.styledPaper {
+  overflow: visible;
+  filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.32));
+  margin-top: 1.5rem;
+}
+
+.styledPaper::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 14px;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  transform: translateY(-50%) rotate(45deg);
+  z-index: 0;
+}
+
+/* Action Menu Icon */
+.MuiIconButton-root {
+  padding: 8px;
+}
+
+/* Tooltip */
+.MuiTooltip-root {
+  display: flex;
+  justify-content: center;
+}

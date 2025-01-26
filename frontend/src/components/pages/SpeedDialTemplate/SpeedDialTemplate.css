@@ -1,0 +1,42 @@
+/* Base styling for the SpeedDial container */
+.speed-dial-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  /* Styling the SpeedDial button */
+  .speed-dial .MuiSpeedDial-fab {
+    background-color: #032803;
+    transition: background-color 0.3s ease;
+  }
+  
+  .speed-dial .MuiSpeedDial-fab:hover {
+    background-color: green;
+  }
+  
+  /* Styling the SpeedDial actions */
+  .speed-dial-action {
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Responsiveness: Adjust position for smaller screens */
+  @media (max-width: 600px) {
+    .speed-dial-container {
+      bottom: 10px;
+      right: 10px;
+    }
+    
+    /* Change SpeedDial button size on small screens */
+    .speed-dial .MuiSpeedDial-fab {
+      width: 56px;
+      height: 56px;
+    }
+  
+    .speed-dial .MuiSpeedDialAction-fab {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  

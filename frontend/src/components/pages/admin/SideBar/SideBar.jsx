@@ -16,13 +16,13 @@ import '../SideBar/SideBar.css';
 
 const SideBar = () => {
     const location = useLocation();
-    
+
     return (
         <div className="sidebar">
             <React.Fragment>
-                <ListItemButton component={Link} to="/">
+                <ListItemButton component={Link} to="/Admin/dashboard">
                     <ListItemIcon>
-                        <HomeIcon className={`sidebar-icon ${location.pathname === ("/" || "/Admin/dashboard") ? 'active' : ''}`} />
+                        <HomeIcon className={`sidebar-icon ${location.pathname === "/Admin/dashboard" ? 'active' : ''}`} />
                     </ListItemIcon>
                     <ListItemText primary="Home" />
                 </ListItemButton>
@@ -83,6 +83,6 @@ const SideBar = () => {
             </React.Fragment>
         </div>
     );
-}
+};
 
 export default SideBar;

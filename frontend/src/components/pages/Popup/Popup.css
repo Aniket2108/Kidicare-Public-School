@@ -1,0 +1,27 @@
+.snackbar {
+    max-width: 400px;
+    width: 90%;
+}
+
+.alert {
+    width: 100%;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .snackbar {
+        max-width: 300px;
+    }
+    .alert {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .snackbar {
+        max-width: 250px;
+    }
+    .alert {
+        font-size: 0.75rem;
+    }
+}

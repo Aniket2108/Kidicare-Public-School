@@ -1,0 +1,35 @@
+/* General styles for the table */
+.table-container {
+    margin: 20px;
+    padding: 0;
+  }
+  
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  @media (max-width: 600px) {
+    .table-container {
+      margin: 10px;
+    }
+  
+    /* Make the table scrollable on small screens */
+    .table-responsive {
+      -webkit-overflow-scrolling: touch;
+    }
+  
+    table {
+      font-size: 12px;
+    }
+  
+    th, td {
+      padding: 8px;
+    }
+  }
+  
+  /* Styling the actions column for better clarity */
+  .MuiTableCell-root {
+    font-size: 14px;
+  }
+  

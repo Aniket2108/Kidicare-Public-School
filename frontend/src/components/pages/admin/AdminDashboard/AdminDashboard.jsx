@@ -13,6 +13,9 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { AppBar, Drawer } from '../../styles';
 import SideBar from '../SideBar/SideBar';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import AddClass from '../ClassRelated/AddClass/AddClass';
+import AdminHomePage from '../AdminHomePage/AdminHomePage';
+import ShowClasses from '../ClassRelated/ShowClasses/ShowClasses';
 
 const AdminDashboard = () => {
     const [open, setOpen] = useState(false);
@@ -70,11 +73,31 @@ const AdminDashboard = () => {
                 </Drawer>
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <Toolbar />
-                        <Routes>
+                    <Routes>
                         <Route path="/" element={<AdminHomePage />} />
                         <Route path='*' element={<Navigate to="/" />} />
                         <Route path="/Admin/dashboard" element={<AdminHomePage />} />
-                        {/* <Route path="/Admin/profile" element={<AdminProfile />} /> */}
+
+                        {/* Class Routes */}
+                        <Route path="/Admin/addclass" element={<AddClass />} />
+                        <Route path="/Admin/classes" element={<ShowClasses />} exact/>
+                        {/* <Route path="/Admin/classes/class/:id" element={<ClassDetails />} />
+                        <Route path="/Admin/addclass" element={<AddClass />} /> */}
+                        
+                    </Routes>
+                </Box>
+            </Box>
+        </>
+    );
+};
+
+export default AdminDashboard;
+
+
+
+
+
+{/* <Route path="/Admin/profile" element={<AdminProfile />} /> */}
                         {/* <Route path="/Admin/complains" element={<SeeComplains />} /> */}
 
                         {/* Notice */}
@@ -90,13 +113,8 @@ const AdminDashboard = () => {
                         {/* <Route path="/Admin/subject/student/attendance/:studentID/:subjectID" element={<StudentAttendance situation="Subject" />} /> */}
                         {/* <Route path="/Admin/subject/student/marks/:studentID/:subjectID" element={<StudentExamMarks situation="Subject" />} /> */}
 
-                        {/* Class */}
-                        {/* <Route path="/Admin/addclass" element={<AddClass />} /> */}
-                        {/* <Route path="/Admin/classes" element={<ShowClasses />} /> */}
-                        {/* <Route path="/Admin/classes/class/:id" element={<ClassDetails />} /> */}
-                        {/* <Route path="/Admin/class/addstudents/:id" element={<AddStudent situation="Class" />} /> */}
 
-                        {/* Student */}
+{/* Student */}
                         {/* <Route path="/Admin/addstudents" element={<AddStudent situation="Student" />} /> */}
                         {/* <Route path="/Admin/students" element={<ShowStudents />} /> */}
                         {/* <Route path="/Admin/students/student/:id" element={<ViewStudent />} /> */}
@@ -112,16 +130,3 @@ const AdminDashboard = () => {
                         {/* <Route path="/Admin/teachers/addteacher/:id" element={<AddTeacher />} /> */}
 
                         {/* <Route path="/logout" element={<Logout />} /> */}
-                        </Routes>
-                </Box>
-            </Box>
-        </>
-    );
-};
-
-export default AdminDashboard;
-
-
-
-
-
