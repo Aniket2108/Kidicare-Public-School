@@ -1,6 +1,7 @@
 package com.school.mapper;
 
 import com.school.dto.TeacherDTO;
+import com.school.dto.TeacherResponseDTO;
 import com.school.entities.Teacher;
 import org.springframework.stereotype.Component;
 
@@ -37,4 +38,30 @@ public class TeacherMapper {
         return teacherDTO;
     }
 
+    public List<TeacherResponseDTO> teacherToTeacherResponseDTOs(List<Teacher> teachers) {
+
+        List<TeacherResponseDTO> teacherDTOList = new ArrayList<>();
+
+        for(Teacher teacher:teachers){
+            teacherDTOList.add(teacherToteacherResponseDTO(teacher));
+        }
+
+        return teacherDTOList;
+
+    }
+
+    private TeacherResponseDTO teacherToteacherResponseDTO(Teacher teacher) {
+
+        TeacherResponseDTO teacherResponseDTO = new TeacherResponseDTO();
+
+        teacherResponseDTO.setId(teacher.getTeacherId());
+        teacherResponseDTO.setFirstName(teacher.getFirstName());
+        teacherResponseDTO.setLastName(teacher.getLastName());
+        teacherResponseDTO.setMobileNumber(teacher.getMobileNumber());
+        teacherResponseDTO.setEmailId(teacher.getEmailId());
+        teacherResponseDTO.setDateOfBirth(teacher.getDateOfBirth());
+
+        return teacherResponseDTO;
+
+    }
 }

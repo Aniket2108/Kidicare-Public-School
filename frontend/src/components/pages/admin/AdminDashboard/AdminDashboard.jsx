@@ -16,6 +16,9 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import AddClass from '../ClassRelated/AddClass/AddClass';
 import AdminHomePage from '../AdminHomePage/AdminHomePage';
 import ShowClasses from '../ClassRelated/ShowClasses/ShowClasses';
+import ClassDetails from '../ClassRelated/ClassDetails/ClassDetails';
+import ShowTeachers from '../TeacherRelated/ShowTeachers/ShowTeachers';
+import AddTeacher from '../TeacherRelated/AddTeacher/AddTeacher';
 
 const AdminDashboard = () => {
     const [open, setOpen] = useState(false);
@@ -79,10 +82,19 @@ const AdminDashboard = () => {
                         <Route path="/Admin/dashboard" element={<AdminHomePage />} />
 
                         {/* Class Routes */}
+                        <Route path="/Admin/classes" element={<ShowClasses />} />
+                        <Route path="/Admin/classes/class/:id" element={<ClassDetails />} />
                         <Route path="/Admin/addclass" element={<AddClass />} />
-                        <Route path="/Admin/classes" element={<ShowClasses />} exact/>
-                        {/* <Route path="/Admin/classes/class/:id" element={<ClassDetails />} />
-                        <Route path="/Admin/addclass" element={<AddClass />} /> */}
+
+
+                        {/* Teacher */}
+                        <Route path="/Admin/teachers" element={<ShowTeachers />} />
+                        {/* <Route path="/Admin/teachers/teacher/:id" element={<TeacherDetails />} />
+                        <Route path="/Admin/teachers/chooseclass" element={<ChooseClass situation="Teacher" />} />
+                        <Route path="/Admin/teachers/choosesubject/:id" element={<ChooseSubject situation="Norm" />} />
+                        <Route path="/Admin/teachers/choosesubject/:classID/:teacherID" element={<ChooseSubject situation="Teacher" />} /> */}
+                        <Route path="/Admin/teachers/addteacher" element={<AddTeacher />} />
+
                         
                     </Routes>
                 </Box>

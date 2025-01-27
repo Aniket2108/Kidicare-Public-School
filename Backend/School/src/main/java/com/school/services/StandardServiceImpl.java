@@ -9,7 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StandardServiceImpl implements StandardService {
@@ -47,5 +49,13 @@ public class StandardServiceImpl implements StandardService {
         List<Standard> standards = standardRepository.findAll();
 
         return standardMapper.standardToStandardResponseDTO(standards);
+    }
+
+    @Override
+    public StandardResponseDTO getStandardById(Integer id){
+
+        Standard standardEntity = standardRepository.findById(id).orElseThrow();
+
+        return standardMapper.mapStandardToResponseDTO(standardEntity);
     }
 }

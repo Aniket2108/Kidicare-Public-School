@@ -1,14 +1,15 @@
 package com.school.services;
 
 import com.school.dto.TeacherDTO;
+import com.school.dto.TeacherResponseDTO;
 
 import java.util.List;
 
 public interface TeacherService {
 
-    TeacherDTO addTeacher(TeacherDTO request);
+    TeacherResponseDTO addTeacher(TeacherDTO request);
 
-    List<TeacherDTO> getAllTeachers();
+    List<TeacherResponseDTO> getAllTeachers();
 
     boolean updateTeacher(String mobileNumber,TeacherDTO teacherDTO);
 

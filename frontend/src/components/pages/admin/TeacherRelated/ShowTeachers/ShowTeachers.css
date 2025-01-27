@@ -1,0 +1,67 @@
+/* Main container styling */
+.teacher-table {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Responsive styling for table */
+@media screen and (max-width: 768px) {
+    .teacher-table {
+        padding: 10px;
+    }
+
+    .MuiTableCell-root {
+        font-size: 0.875rem;
+        padding: 8px;
+    }
+}
+
+/* Style for the loading text */
+.loading {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Responsive button container */
+.add-teacher-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+    padding: 0 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .add-teacher-btn {
+        justify-content: center;
+    }
+}
+
+/* Centering action buttons for small screens */
+@media screen and (max-width: 480px) {
+    .MuiTableCell-root {
+        text-align: center;
+    }
+
+    .teacher-table .MuiButton-root {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+
+    .MuiIconButton-root {
+        padding: 5px;
+    }
+}
+
+/* Additional responsive styles */
+@media screen and (max-width: 360px) {
+    .teacher-table {
+        padding: 5px; /* Further reduce padding for very small screens */
+    }
+
+    .MuiTableCell-root {
+        font-size: 0.75rem; /* Further adjust font size */
+    }
+}

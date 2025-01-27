@@ -6,6 +6,8 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  max-width: 800px; /* Set a maximum width */
+  margin: 0 auto; /* Center the container */
 }
 
 /* Responsive Design */

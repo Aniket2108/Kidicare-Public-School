@@ -1,13 +1,14 @@
 package com.school.services;
 
 import com.school.dto.TeacherDTO;
+import com.school.dto.TeacherResponseDTO;
 import com.school.entities.Teacher;
 import com.school.mapper.TeacherMapper;
 import com.school.repository.TeacherRepository;
+import com.school.security.PasswordEncoder;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,20 +26,30 @@ public class TeacherServiceImpl implements TeacherService{
     @Autowired
     private TeacherMapper teacherMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
-    public TeacherDTO addTeacher(TeacherDTO request) {
+    public TeacherResponseDTO addTeacher(TeacherDTO request) {
 
         Teacher teacher = mapper.map(request,Teacher.class);
+        Teacher teacherByMobile = teacherRepository.findByMobileNumber(teacher.getMobileNumber());
+        Teacher teacherByEmail = teacherRepository.findByEmailId(teacher.getEmailId());
 
-        return mapper.map((teacherRepository.save(teacher)),TeacherDTO.class);
+        if(teacherByEmail == null && teacherByMobile == null){
+            teacher.setPassword(passwordEncoder.encodePassword(teacher.getPassword()));
+            return mapper.map((teacherRepository.save(teacher)),TeacherResponseDTO.class);
+        }
+
+        return null;
     }
 
     @Override
-    public List<TeacherDTO> getAllTeachers() {
+    public List<TeacherResponseDTO> getAllTeachers() {
 
         List<Teacher> teachers = teacherRepository.findAll();
 
-        return teacherMapper.teacherToTeacherDTOs(teachers);
+        return teacherMapper.teacherToTeacherResponseDTOs(teachers);
     }
 
     @Override

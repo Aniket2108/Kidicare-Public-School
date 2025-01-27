@@ -11,4 +11,5 @@ public interface StandardService {
 
     List<StandardResponseDTO> getAllStandards();
 
+    StandardResponseDTO getStandardById(Integer id);
 }

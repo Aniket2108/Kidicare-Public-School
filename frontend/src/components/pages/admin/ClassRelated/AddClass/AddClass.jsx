@@ -29,8 +29,6 @@ const AddClass = () => {
         sclassName
       );
   
-      console.log(response);
-  
       if (response.status === 201) {
         setMessage("Class created successfully!");
         setShowPopup(true);

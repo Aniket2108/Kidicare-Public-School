@@ -1,0 +1,78 @@
+.class-details {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    /* Removed text-align: center; */
+    padding: 1rem; /* Add padding for better spacing */
+}
+
+.class-title {
+    text-align: center;
+    margin-top: 1rem; /* Reduced margin from top */
+    font-weight: bold;
+}
+
+.tab-header {
+    border-bottom: 1px solid #ddd;
+    background-color: #f9f9f9;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.tab-content {
+    margin-top: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .tab-content {
+        padding: 1rem; /* Reduce padding on smaller screens */
+    }
+
+    .class-title {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .class-title {
+        font-size: 1.2rem; /* Further adjust font size for very small screens */
+    }
+
+    .tab-content {
+        padding: 0.5rem; /* Further reduce padding */
+    }
+}
+
+.loading {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .tab-header {
+        font-size: 0.9rem;
+    }
+
+    .tab-content {
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .tab-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab-content {
+        margin-top: 5rem;
+        padding: 0.5rem;
+    }
+}

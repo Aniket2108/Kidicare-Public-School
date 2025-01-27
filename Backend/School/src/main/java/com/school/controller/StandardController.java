@@ -21,5 +21,9 @@ public class StandardController {
         return ResponseEntity.status(HttpStatus.OK).body(standardService.getAllStandards());
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getStandardById(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(standardService.getStandardById(Integer.parseInt(id)));
+    }
 
 }

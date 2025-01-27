@@ -43,7 +43,7 @@ public class StandardMapper {
 
     }
 
-    private StandardResponseDTO mapStandardToResponseDTO(Standard standard) {
+    public StandardResponseDTO mapStandardToResponseDTO(Standard standard) {
 
         StandardResponseDTO standardResponseDTO = new StandardResponseDTO();
 

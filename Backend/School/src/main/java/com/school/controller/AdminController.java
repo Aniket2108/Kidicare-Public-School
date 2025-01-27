@@ -33,7 +33,15 @@ public class AdminController {
 
     @PostMapping(value = "/teacher")
     public ResponseEntity<?> addTeacher(@RequestBody TeacherDTO request){
-        return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.addTeacher(request));
+        Object entity = null;
+
+        entity = teacherService.addTeacher(request);
+
+        if(entity == null){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(entity);
     }
 
     @GetMapping(value = "/teacher")

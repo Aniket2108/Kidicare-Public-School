@@ -1,0 +1,96 @@
+/* AddTeacher.css */
+.add-teacher {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.register {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.registerTitle {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.registerInput {
+    width: 100%; /* Ensure all inputs take full width */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px; /* Make font size consistent */
+    box-sizing: border-box;
+}
+
+/* Ensure height matches other fields */
+.registerInput[type="password"] {
+    height: 40px; /* Set height to match other fields */
+    padding: 10px; /* Ensure padding is consistent */
+}
+
+.registerInput::placeholder {
+    font-size: 14px; /* Make placeholder font size consistent */
+    color: #777; /* You can set the color if needed */
+}
+
+.registerButton {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.registerButton:disabled {
+    background-color: #ccc;
+}
+
+.registerButton:hover {
+    background-color: #45a049;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.MuiInputAdornment-root {
+    position: absolute;
+    right: 10px;
+    font-size: 0.8rem; /* Decrease the size of the icon */
+}
+
+@media (max-width: 600px) {
+    .register {
+        width: 90%;
+    }
+
+    .registerTitle {
+        font-size: 20px;
+    }
+
+    .registerInput {
+        font-size: 14px;
+    }
+
+    .registerButton {
+        font-size: 14px;
+    }
+}
