@@ -1,0 +1,56 @@
+.teacher-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.loading,
+.error {
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.teacher-details-content {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subject-info {
+    margin-top: 16px;
+}
+
+.add-subject-button {
+    margin-top: 16px;
+    background-color: #1976d2;
+    color: #fff;
+    font-size: 1rem;
+    text-transform: none;
+}
+
+.add-subject-button:hover {
+    background-color: #115293;
+}
+
+@media (max-width: 600px) {
+    .teacher-details-content {
+        padding: 16px;
+    }
+
+    .add-subject-button {
+        font-size: 0.9rem;
+    }
+
+    .loading {
+        font-size: 1.2rem;
+    }
+}

@@ -73,9 +73,9 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
-    public boolean deleteTeacher(String mobileNumber) {
+    public boolean deleteTeacher(Integer id) {
 
-        Teacher teacher = teacherRepository.findByMobileNumber(mobileNumber);
+        Teacher teacher = teacherRepository.findById(id).orElseThrow();
 
         if(teacher == null) {
             return false;

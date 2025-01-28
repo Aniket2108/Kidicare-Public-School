@@ -19,6 +19,7 @@ import ShowClasses from '../ClassRelated/ShowClasses/ShowClasses';
 import ClassDetails from '../ClassRelated/ClassDetails/ClassDetails';
 import ShowTeachers from '../TeacherRelated/ShowTeachers/ShowTeachers';
 import AddTeacher from '../TeacherRelated/AddTeacher/AddTeacher';
+import TeacherDetails from '../TeacherRelated/TeacherDetails/TeacherDetails';
 
 const AdminDashboard = () => {
     const [open, setOpen] = useState(false);
@@ -89,8 +90,8 @@ const AdminDashboard = () => {
 
                         {/* Teacher */}
                         <Route path="/Admin/teachers" element={<ShowTeachers />} />
-                        {/* <Route path="/Admin/teachers/teacher/:id" element={<TeacherDetails />} />
-                        <Route path="/Admin/teachers/chooseclass" element={<ChooseClass situation="Teacher" />} />
+                        <Route path="/Admin/teachers/teacher/:id" element={<TeacherDetails />} />
+                        {/* <Route path="/Admin/teachers/chooseclass" element={<ChooseClass situation="Teacher" />} />
                         <Route path="/Admin/teachers/choosesubject/:id" element={<ChooseSubject situation="Norm" />} />
                         <Route path="/Admin/teachers/choosesubject/:classID/:teacherID" element={<ChooseSubject situation="Teacher" />} /> */}
                         <Route path="/Admin/teachers/addteacher" element={<AddTeacher />} />

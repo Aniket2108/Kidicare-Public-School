@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Paper, Table, TableBody, TableContainer, TableHead, TablePagination,
-    Button, Box, IconButton
+    Button, Box, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle
 } from '@mui/material';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import { StyledTableCell, StyledTableRow } from '../../../styles';
@@ -26,13 +26,37 @@ const ShowTeachers = () => {
 
     const navigate = useNavigate();
 
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+    const [selectedTeacherId, setSelectedTeacherId] = useState(null);
+
+
+    const ConfirmDeleteDialog = ({ open, onClose, onConfirm }) => {
+        return (
+            <Dialog open={open} onClose={onClose}>
+                <DialogTitle>Confirm Deletion</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Are you sure you want to delete this teacher?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={onClose} color="primary">
+                        No
+                    </Button>
+                    <Button onClick={onConfirm} color="error" autoFocus>
+                        Yes
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        );
+    };
+
+
     useEffect(() => {
         const fetchTeachers = async () => {
             try {
                 setLoading(true);
-                const res = await axios.get(
-                    `${serverUrl}/admin/teacher`
-                ); 
+                const res = await axios.get(`${serverUrl}/admin/teacher`);
                 setTeachersList(res.data);
                 setLoading(false);
             } catch (err) {
@@ -64,6 +88,27 @@ const ShowTeachers = () => {
     const deleteHandler = (deleteID, address) => {
         setMessage("Sorry the delete function has been disabled for now.");
         setShowPopup(true);
+    };
+
+    const handleDeleteClick = (teacherId) => {
+        setSelectedTeacherId(teacherId);
+        setConfirmDialogOpen(true);
+    };
+
+    const confirmDelete = async () => {
+        setConfirmDialogOpen(false);
+        try {
+            await axios.delete(`${serverUrl}/admin/teacher/${selectedTeacherId}`);
+            setMessage("Teacher Deleted Successfully");
+            setShowPopup(true);
+            setTeachersList(teachersList.filter(teacher => teacher.id !== selectedTeacherId));
+            setTimeout(() => {
+                setShowPopup(false);
+              }, 2000);
+        } catch (err) {
+            console.error("Failed to delete teacher:", err);
+        }
+        
     };
 
     const columns = [
@@ -105,10 +150,10 @@ const ShowTeachers = () => {
                         </StyledTableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                            <StyledTableRow hover key={row.id}>
+                        {teachersList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((teacher) => (
+                            <StyledTableRow hover key={teacher.id}>
                                 {columns.map((column) => {
-                                    const value = row[column.id];
+                                    const value = teacher[column.id];
                                     return (
                                         <StyledTableCell key={column.id}>
                                             {column.format && typeof value === 'number' ? column.format(value) : value}
@@ -116,11 +161,11 @@ const ShowTeachers = () => {
                                     );
                                 })}
                                 <StyledTableCell align="center">
-                                    <IconButton onClick={() => deleteHandler(row.id, "Teacher")}>
+                                    <IconButton onClick={() => handleDeleteClick(teacher.id)}>
                                         <PersonRemoveIcon color="error" />
                                     </IconButton>
                                     <BlueButton variant="contained"
-                                        onClick={() => navigate("/Admin/teachers/teacher/" + row.id)}>
+                                        onClick={() => navigate("/Admin/teachers/teacher/" + teacher.id)}>
                                         View
                                     </BlueButton>
                                 </StyledTableCell>
@@ -143,8 +188,58 @@ const ShowTeachers = () => {
             />
             <SpeedDialTemplate actions={actions} />
             <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
+            <ConfirmDeleteDialog open={confirmDialogOpen} onClose={() => setConfirmDialogOpen(false)} onConfirm={confirmDelete} />
         </Paper>
     );
 };
 
 export default ShowTeachers;
+
+
+
+
+
+    
+
+    
+
+//     return (
+//         <Paper className="teacher-table">
+//             <TableContainer>
+//                 <Table stickyHeader aria-label="teacher table">
+//                     <TableHead>
+//                         <StyledTableRow>
+//                             {columns.map((column) => (
+//                                 <StyledTableCell key={column.id} style={{ minWidth: column.minWidth }}>
+//                                     {column.label}
+//                                 </StyledTableCell>
+//                             ))}
+//                             <StyledTableCell align="center">Actions</StyledTableCell>
+//                         </StyledTableRow>
+//                     </TableHead>
+//                     <TableBody>
+//                         {teachersList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((teacher) => (
+//                             <StyledTableRow hover key={teacher.id}>
+//                                 {columns.map((column) => (
+//                                     <StyledTableCell key={column.id}>
+//                                         {teacher[column.id]}
+//                                     </StyledTableCell>
+//                                 ))}
+//                                 <StyledTableCell align="center">
+//                                     <IconButton onClick={() => handleDeleteClick(teacher.id)}>
+//                                         <PersonRemoveIcon color="error" />
+//                                     </IconButton>
+//                                     <BlueButton variant="contained" onClick={() => navigate(`/Admin/teachers/teacher/${teacher.id}`)}>
+//                                         View
+//                                     </BlueButton>
+//                                 </StyledTableCell>
+//                             </StyledTableRow>
+//                         ))}
+//                     </TableBody>
+//                 </Table>
+//             </TableContainer>
+            
+            
+//         </Paper>
+//     );
+// };

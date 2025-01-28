@@ -13,5 +13,5 @@ public interface TeacherService {
 
     boolean updateTeacher(String mobileNumber,TeacherDTO teacherDTO);
 
-    boolean deleteTeacher(String mobileNumber);
+    boolean deleteTeacher(Integer id);
 }

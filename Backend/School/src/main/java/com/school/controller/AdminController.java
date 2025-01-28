@@ -60,10 +60,10 @@ public class AdminController {
     }
 
 
-    @DeleteMapping(value = "/teacher/{mobileNumber}")
-    public ResponseEntity<?> deleteTeacher(@PathVariable String mobileNumber){
+    @DeleteMapping(value = "/teacher/{id}")
+    public ResponseEntity<?> deleteTeacher(@PathVariable String id){
 
-        if(teacherService.deleteTeacher(mobileNumber)){
+        if(teacherService.deleteTeacher(Integer.parseInt(id))){
             return ResponseEntity.status(HttpStatus.OK).body(null);
         }
 
