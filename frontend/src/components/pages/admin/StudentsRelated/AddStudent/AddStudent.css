@@ -1,0 +1,144 @@
+.register {
+    display: flex;
+    justify-content: center;  /* Centers the form horizontally */
+    align-items: center;      /* Centers the form vertically */
+    min-height: 100vh;        /* Ensures the form is always centered even with small content */
+    background: #f8f9fa;
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;         
+    box-sizing: border-box;   
+}
+
+.registerTitle {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.registerInput {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.registerButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50; /* Green color */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.registerButton:hover {
+    background-color: #45a049;
+}
+
+.previousButton {
+    margin-right: 10px; /* Space between buttons */
+}
+
+.registerButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Button Styling (Same for Next, Previous, and Add) */
+.registerButton,
+.nextButton,
+.prevButton {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.nextButton {
+    margin-left: 10px;
+}
+
+.prevButton {
+    margin-right: 10px;
+    background-color: #6c757d; /* Gray color for Previous button */
+}
+
+.registerButton:hover:not(:disabled),
+.nextButton:hover {
+    background-color: #0056b3;
+}
+
+.prevButton:hover {
+    background-color: #5a6268;
+}
+
+.registerButton:disabled,
+.nextButton:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+/* Button Container for Next & Previous */
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .register {
+        height: auto;
+        padding: 20px;
+    }
+
+    .registerForm {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .registerForm {
+        padding: 20px;
+    }
+
+    .registerTitle {
+        font-size: 22px;
+    }
+
+    .registerInput,
+    .registerButton {
+        font-size: 14px;
+    }
+}

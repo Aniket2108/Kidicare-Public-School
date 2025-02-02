@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Container, Typography } from '@mui/material';
 import './TeacherDetails.css';
+import { serverUrl } from "../../../../data/Data";
+import axios from 'axios';
 
 const TeacherDetails = () => {
     const navigate = useNavigate();
@@ -13,21 +15,22 @@ const TeacherDetails = () => {
 
     useEffect(() => {
         const fetchTeacherDetails = async () => {
+            setLoading(true);
+            setError(null);
+    
             try {
-                const response = await fetch(`https://api.example.com/teachers/${teacherID}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch teacher details');
-                }
-                const data = await response.json();
-                setTeacherDetails(data);
+                const response = await axios.get(`${serverUrl}/admin/teacher/${teacherID}`);
+                setTeacherDetails(response.data);
             } catch (err) {
-                setError(err.message);
+                setError(err.response?.data?.message || "Failed to fetch teacher details");
             } finally {
                 setLoading(false);
             }
         };
-
-        fetchTeacherDetails();
+    
+        if (teacherID) {
+            fetchTeacherDetails();
+        }
     }, [teacherID]);
 
     if (error) {
@@ -50,10 +53,16 @@ const TeacherDetails = () => {
                         Teacher Details
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                        Teacher Name: {teacherDetails?.name}
+                    Teacher Name: {teacherDetails?.firstName && teacherDetails?.lastName ? `${teacherDetails.firstName} ${teacherDetails.lastName}` : ""}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                        Class Name: {teacherDetails?.teachSclass?.sclassName}
+                        Mobile Number: {teacherDetails?.mobileNumber}
+                    </Typography>
+                    <Typography variant="h6" gutterBottom>
+                        Email Id: {teacherDetails?.emailId}
+                    </Typography>
+                    <Typography variant="h6" gutterBottom>
+                        DOB: {teacherDetails?.dateOfBirth}
                     </Typography>
                     {isSubjectNamePresent ? (
                         <div className="subject-info">

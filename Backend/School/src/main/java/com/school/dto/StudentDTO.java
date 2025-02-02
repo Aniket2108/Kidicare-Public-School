@@ -1,6 +1,5 @@
 package com.school.dto;
 
-
 import lombok.Data;
 import java.sql.Date;
 
@@ -12,14 +11,8 @@ public class StudentDTO {
 
     private String lastName;
 
-    private String fatherName;
-
-    private String motherName;
-
     private Date dateOfBirth;
 
-    private String fatherMobileNumber;
-
-    private String motherMobileNumber;
+    private String aadhaarCard;
 
 }

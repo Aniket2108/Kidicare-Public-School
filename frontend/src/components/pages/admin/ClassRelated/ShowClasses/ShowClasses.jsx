@@ -11,6 +11,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import SpeedDialTemplate from '../../../SpeedDialTemplate/SpeedDialTemplate';
 import Popup from '../../../Popup/Popup';
+import { serverUrl } from "../../../../data/Data";
 
 import '../ShowClasses/ShowClasses.css';
 
@@ -30,11 +31,10 @@ const ShowClasses = () => {
   const fetchClasses = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/standard/');
+      const response = await fetch(`${serverUrl}/standard/`);
       if (response.ok) {
         const data = await response.json();
         setSclassesList(data);
-        console.log(data);
       } else {
         setError("Failed to fetch classes.");
       }
@@ -73,7 +73,11 @@ const ShowClasses = () => {
   const SclassButtonHaver = ({ row }) => {
     const actions = [
       { icon: <PostAddIcon />, name: 'Add Subjects', action: () => navigate("/Admin/addsubject/" + row.id) },
-      { icon: <PersonAddAlt1Icon />, name: 'Add Student', action: () => navigate("/Admin/class/addstudents/" + row.id) },
+      { 
+        icon: <PersonAddAlt1Icon />, 
+        name: 'Add Student', 
+        action: () => navigate("/Admin/class/addstudents/" + row.id, { state: { classesList: sclassesList } }) // Pass sclassesList as state
+      },
     ];
     return (
       <div className="button-container">

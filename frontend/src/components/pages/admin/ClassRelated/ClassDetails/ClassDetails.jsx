@@ -1,23 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
-// import {
-//     Box, Container, Typography, Tab, IconButton,
-// } from "@mui/material";
-// import TabContext from "@mui/lab/TabContext";
-// import TabList from "@mui/lab/TabList";
-// import TabPanel from "@mui/lab/TabPanel";
-// import { BlueButton, GreenButton, PurpleButton } from "../../../buttonStyles";
-// import TableTemplate from "../../../TableTemplate/TableTemplate";
-// import SpeedDialTemplate from "../../../SpeedDialTemplate/SpeedDialTemplate";
-// import Popup from "../../../Popup/Popup";
-// import DeleteIcon from "@mui/icons-material/Delete";
-// import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-// import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
-// import PostAddIcon from "@mui/icons-material/PostAdd";
-// import "./ClassDetails.css";
-// import axios from "axios";
-// import { serverUrl } from "../../../../data/Data";
-
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {

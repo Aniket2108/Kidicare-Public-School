@@ -77,13 +77,16 @@ public class TeacherServiceImpl implements TeacherService{
 
         Teacher teacher = teacherRepository.findById(id).orElseThrow();
 
-        if(teacher == null) {
-            return false;
-        }
-
         teacherRepository.delete(teacher);
         return true;
     }
 
+    @Override
+    public TeacherResponseDTO getTeacherById(Integer id){
+
+        Teacher teacherEntity = teacherRepository.findById(id).orElseThrow();
+
+        return teacherMapper.teacherToteacherResponseDTO(teacherEntity);
+    }
 
 }

@@ -14,4 +14,6 @@ public interface TeacherService {
     boolean updateTeacher(String mobileNumber,TeacherDTO teacherDTO);
 
     boolean deleteTeacher(Integer id);
+
+    TeacherResponseDTO getTeacherById(Integer id);
 }

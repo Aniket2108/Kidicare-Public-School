@@ -2,7 +2,6 @@ package com.school.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.sql.Date;
 
 @Entity
@@ -21,23 +20,26 @@ public class Student {
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @Column(name = "fatherName" ,nullable = false)
-    private String fatherName;
-
-    @Column(name = "motherName", nullable = false)
-    private String motherName;
-
-    @Column(name = "dateOfBirth",nullable = false)
+    @Column(name = "dateOfBirth", nullable = false)
     private Date dateOfBirth;
 
-    @Column(name = "fatherMobileNumber")
-    private String fatherMobileNumber;
+    @Column(name = "aadhaar_card", nullable = false)
+    private String aadhaarCard;
 
-    @Column(name = "motherMobileNumber")
-    private String motherMobileNumber;
+    @Column(name = "blood_group", nullable = false)
+    private String bloodGroup;
 
     @ManyToOne
-    @JoinColumn(name="class_id")
+    @JoinColumn(name = "class_id")
     private Standard myStandard;
 
+    // Relationship with Father (Many students can have the same father)
+    @ManyToOne
+    @JoinColumn(name = "father_id", referencedColumnName = "fatherId", nullable = false)
+    private Father father;
+
+    // Relationship with Mother (Many students can have the same mother)
+    @ManyToOne
+    @JoinColumn(name = "mother_id", referencedColumnName = "motherId", nullable = false)
+    private Mother mother;
 }

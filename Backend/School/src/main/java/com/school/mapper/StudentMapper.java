@@ -26,10 +26,6 @@ public class StudentMapper {
 
         studentDTO.setFirstName(student.getFirstName());
         studentDTO.setLastName(student.getLastName());
-        studentDTO.setFatherName(student.getFatherName());
-        studentDTO.setMotherName(student.getMotherName());
-        studentDTO.setFatherMobileNumber(student.getFatherMobileNumber());
-        studentDTO.setMotherMobileNumber(student.getMotherMobileNumber());
         studentDTO.setDateOfBirth(student.getDateOfBirth());
 
         return studentDTO;

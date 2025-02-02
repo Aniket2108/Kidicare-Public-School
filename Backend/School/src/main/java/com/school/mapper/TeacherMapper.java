@@ -50,7 +50,7 @@ public class TeacherMapper {
 
     }
 
-    private TeacherResponseDTO teacherToteacherResponseDTO(Teacher teacher) {
+    public TeacherResponseDTO teacherToteacherResponseDTO(Teacher teacher) {
 
         TeacherResponseDTO teacherResponseDTO = new TeacherResponseDTO();
 

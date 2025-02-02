@@ -110,4 +110,9 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.OK).body(standardService.getAllStandards());
     }
 
+    @GetMapping(value =  "/teacher/{id}")
+    public ResponseEntity<?> getTeacherById(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(teacherService.getTeacherById(Integer.parseInt(id)));
+    }
+
 }

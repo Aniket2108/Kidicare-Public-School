@@ -22,7 +22,7 @@ public class TeacherController {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(request));
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/student")
     public ResponseEntity<?> getAllStudents(){
 
         return  ResponseEntity.status(HttpStatus.OK).body(studentService.getAllStudents());
