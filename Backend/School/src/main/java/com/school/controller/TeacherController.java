@@ -1,5 +1,6 @@
 package com.school.controller;
 
+import com.school.dto.AddStudentDTO;
 import com.school.dto.StudentDTO;
 import com.school.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class TeacherController {
 
 
     @PostMapping(value = "/student")
-    public ResponseEntity<?> addStudent(@RequestBody StudentDTO request){
+    public ResponseEntity<?> addStudent(@RequestBody AddStudentDTO request){
 
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(request));
     }

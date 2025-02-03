@@ -3,6 +3,7 @@ package com.school.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,8 +31,8 @@ public class Mother {
     @Column(name = "emailId")
     private String emailId;
 
-    @Column(name = "aadhaarcar")
-    private String aadhaarcard;
+    @Column(name = "aadhaar_card")
+    private String aadhaarCard;
 
     @Column(name = "blood_group")
     private String bloodGroup;
@@ -44,5 +45,13 @@ public class Mother {
 
     // One mother can have multiple students
     @OneToMany(mappedBy = "mother")
-    private List<Student> students;
+    private List<Student> children = new ArrayList<>();
+
+    public void addChild(Student child){
+        children.add(child);
+    }
+
+    public void deleteChild(Student child){
+        children.remove(child);
+    }
 }

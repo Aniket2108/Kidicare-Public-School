@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Popup from '../../../Popup/Popup';
 import { CircularProgress } from '@mui/material';
 import './AddStudent.css'; // Import the CSS file
@@ -9,8 +9,10 @@ import axios from 'axios';
 const AddStudent = ({ situation }) => {
     const navigate = useNavigate();
     const params = useParams();
+    const location = useLocation();
+    const sclassesList = location.state?.classesList || []; // Access sclassesList from location state
 
-    const [step, setStep] = useState(3);
+    const [step, setStep] = useState(1);
 
     // Father's details
     const [fatherFirstName, setFatherFirstName] = useState('');
@@ -35,13 +37,16 @@ const AddStudent = ({ situation }) => {
     const [motherOccupationAddress, setMotherOccupationAddress] = useState('');
 
     // Student's details
-    const [name, setName] = useState('');
+    const [studentFirstName, setFirstName] = useState('');
+    const [studentLastName, setLastName] = useState('');
     const [rollNum, setRollNum] = useState('');
     const [password, setPassword] = useState('');
     const [className, setClassName] = useState('');
     const [sclassName, setSclassName] = useState('');
-    const [sclassesList, setSclassesList] = useState([]);
     const [classId, setClassId] = useState('');
+    const [studentDateOfBirth, setStudentDateOfBirth] = useState('');
+    const [studentAadhaarCard, setStudentAadhaarCard] = useState('');
+    const [studentBloodGroup, setStudentBloodGroup] = useState('');
 
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('');
@@ -51,56 +56,30 @@ const AddStudent = ({ situation }) => {
     const role = 'Student';
     const attendance = [];
 
+
+    
     useEffect(() => {
         if (situation === 'Class') {
             setClassId(params.id);
         }
     }, [params.id, situation]);
-
-    // useEffect(() => {
-    //     setLoader(true);
-    //     axios
-    //         .get(`${serverUrl}/standard/`)
-    //         .then((response) => {
-    //             console.log(response.data); // Log the response data
-    //             setSclassesList(response.data);
-    //             setLoader(false);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error fetching class list:', error);
-    //             setLoader(false);
-    //         });
-    // }, []);
-
+    
     useEffect(() => {
-        setLoader(true);
-        const endpoint = situation === 'Class' ? `${serverUrl}/standard/${classId}` : `${serverUrl}/standard/`;
-    
-        axios
-            .get(endpoint)
-            .then((response) => {
-                setSclassesList(Array.isArray(response.data) ? response.data : [response.data]); // Ensure it's an array
-                setLoader(false);
-            })
-            .catch((error) => {
-                console.error('Error fetching class list:', error);
-                setLoader(false);
-            });
-    }, [situation, classId]);
-    
-
+        if(situation === 'Class'){
+            const selectedClass = sclassesList.find(
+                (classItem) => classItem.id == params.id
+            ); 
+            setClassName(selectedClass.name);
+            setSclassName(selectedClass.id);
+            setClassId(selectedClass.id);
+        }
+    },[]);
 
     const changeHandler = (event) => {
         if (event.target.value === 'Select Class') {
             setClassName('Select Class');
             setSclassName('');
-        } else {
-            const selectedClass = sclassesList.find(
-                (classItem) => classItem.name === event.target.value // Updated to match the provided structure
-            ); 
-            setClassName(selectedClass.name);
-            setSclassName(selectedClass.id);
-        }
+        } 
     };
 
     const bloodGroups = [
@@ -112,11 +91,10 @@ const AddStudent = ({ situation }) => {
         fatherAadhaarCard, fatherBloodGroup, fatherOccupation, fatherOccupationAddress,
         motherFirstName, motherLastName, motherDateOfBirth, motherMobileNumber, motherEmail,
         motherAadhaarCard, motherBloodGroup, motherOccupation, motherOccupationAddress,
-        name, rollNum, password, sclassName, adminID, role, attendance
+        studentFirstName, studentLastName , rollNum, password, sclassName, adminID, role, attendance
     };
 
-    const submitHandler = (event) => {
-        event.preventDefault();
+    const submitHandler = async () => {
         if (sclassName === '') {
             setMessage('Please select a class');
             setShowPopup(true);
@@ -125,40 +103,105 @@ const AddStudent = ({ situation }) => {
 
         setLoader(true);
 
-        // Simulating API call for user registration
-        setTimeout(() => {
-            setLoader(false);
-            setMessage('Student added successfully!');
+        const formData = {
+            father: {
+                firstName: fatherFirstName,
+                lastName: fatherLastName,
+                dateOfBirth: fatherDateOfBirth,
+                mobileNumber: fatherMobileNumber,
+                emailId: fatherEmail,
+                aadhaarCard: fatherAadhaarCard,
+                bloodGroup: fatherBloodGroup,
+                occupation: fatherOccupation,
+                occupationAddress: fatherOccupationAddress
+            },
+            mother: {
+                firstName: motherFirstName,
+                lastName: motherLastName,
+                dateOfBirth: motherDateOfBirth,
+                mobileNumber: motherMobileNumber,
+                emailId: motherEmail,
+                aadhaarCard: motherAadhaarCard,
+                bloodGroup: motherBloodGroup,
+                occupation: motherOccupation,
+                occupationAddress: motherOccupationAddress
+            },
+            student: {
+                firstName: studentFirstName,
+                lastName: studentLastName,
+                dateOfBirth: studentDateOfBirth,
+                aadhaarCard: studentAadhaarCard,
+                bloodGroup: studentBloodGroup,
+                classId: classId
+            }
+        };
+
+        console.log(formData);
+
+        try{
+            const response = await axios.post(
+                `${serverUrl}/admin/student`,formData
+            );
+            if (response.status === 201) {
+                setMessage("Student Added successfully!");
+                setShowPopup(true);
+                setTimeout(() => {
+                  navigate('/');
+                }, 2000);
+              } 
+              else if(response.status === 409){
+                setMessage("Student Already Exists!");
+                setShowPopup(true);
+              }
+              
+              else {
+                setMessage(`Unexpected response: ${response.status}`);
+                setShowPopup(true);
+              }
+        }
+        catch(error){
+            setMessage("Network Error");
             setShowPopup(true);
+        }
+        finally{
+            setLoader(false);
+        }
 
-            // Reset form fields after successful submission
-            setFatherFirstName('');
-            setFatherLastName('');
-            setFatherDateOfBirth('');
-            setFatherMobileNumber('');
-            setFatherEmail('');
-            setFatherAadhaarCard('');
-            setFatherBloodGroup('');
-            setFatherOccupation('');
-            setFatherOccupationAddress('');
-            setMotherFirstName('');
-            setMotherLastName('');
-            setMotherDateOfBirth('');
-            setMotherMobileNumber('');
-            setMotherEmail('');
-            setMotherAadhaarCard('');
-            setMotherBloodGroup('');
-            setMotherOccupation('');
-            setMotherOccupationAddress('');
-            setName('');
-            setRollNum('');
-            setPassword('');
-            setClassName('');
-            setSclassName('');
+        // Simulating API call for user registration
+        // setTimeout(() => {
+        //     setLoader(false);
+        //     setMessage('Student added successfully!');
+        //     setShowPopup(true);
 
-            // Navigate back after success
-            setTimeout(() => navigate(-1), 1000);
-        }, 1500);
+        //     // Reset form fields after successful submission
+        //     setFatherFirstName('');
+        //     setFatherLastName('');
+        //     setFatherDateOfBirth('');
+        //     setFatherMobileNumber('');
+        //     setFatherEmail('');
+        //     setFatherAadhaarCard('');
+        //     setFatherBloodGroup('');
+        //     setFatherOccupation('');
+        //     setFatherOccupationAddress('');
+        //     setMotherFirstName('');
+        //     setMotherLastName('');
+        //     setMotherDateOfBirth('');
+        //     setMotherMobileNumber('');
+        //     setMotherEmail('');
+        //     setMotherAadhaarCard('');
+        //     setMotherBloodGroup('');
+        //     setMotherOccupation('');
+        //     setMotherOccupationAddress('');
+        //     setFirstName('');
+        //     setLastName('');
+        //     setRollNum('');
+        //     setPassword('');
+        //     setClassName('');
+        //     setSclassName('');
+
+        //     // Navigate back after success
+        //     setTimeout(() => navigate(-1), 1000);
+        // }, 1500);
     };
 
     const isFatherValid = fatherFirstName && fatherLastName && fatherDateOfBirth && fatherMobileNumber &&
@@ -167,7 +210,7 @@ const AddStudent = ({ situation }) => {
     const isMotherValid = motherFirstName && motherLastName && motherDateOfBirth && motherMobileNumber &&
         motherAadhaarCard && motherBloodGroup && motherOccupation && motherOccupationAddress;
 
-    const isStudentValid = name && rollNum && password && sclassName;
+    const isStudentValid = studentFirstName && studentLastName && rollNum && password && sclassName;
 
     // Step-wise validation
     const isValidStep = () => {
@@ -367,15 +410,53 @@ const AddStudent = ({ situation }) => {
                     {step === 3 && (
                         <>
                             <h3>Student's Details</h3>
-                            <label>Student Name</label>
+                            <label>Student's First Name</label>
                             <input
                                 className="registerInput"
                                 type="text"
-                                placeholder="Enter student's name..."
-                                value={name}
-                                onChange={(event) => setName(event.target.value)}
+                                placeholder="Enter student's first name..."
+                                value={studentFirstName}
+                                onChange={(event) => setFirstName(event.target.value)}
                                 required
                             />
+                            <label>Student's Last Name</label>
+                            <input
+                                className="registerInput"
+                                type="text"
+                                placeholder="Enter student's last name..."
+                                value={studentLastName}
+                                onChange={(event) => setLastName(event.target.value)}
+                                required
+                            />
+                            <label>Student's Date of Birth</label>
+                            <input
+                                className="registerInput"
+                                type="date"
+                                value={studentDateOfBirth}
+                                onChange={(event) => setStudentDateOfBirth(event.target.value)}
+                                required
+                            />
+                            <label>Student's Aadhaar Card</label>
+                            <input
+                                className="registerInput"
+                                type="text"
+                                placeholder="Enter Student's Aadhaar number..."
+                                value={studentAadhaarCard}
+                                onChange={(event) => setStudentAadhaarCard(event.target.value)}
+                                required
+                            />
+                            <label>Student's Blood Group</label>
+                            <select
+                                className="registerInput"
+                                value={studentBloodGroup}
+                                onChange={(event) => setStudentBloodGroup(event.target.value)}
+                                required
+                            >
+                                <option value="">Select Blood Group</option>
+                                {bloodGroups.map((group, index) => (
+                                    <option key={index} value={group}>{group}</option>
+                                ))}
+                            </select>
                             <label>Roll Number</label>
                             <input
                                 className="registerInput"
@@ -396,7 +477,7 @@ const AddStudent = ({ situation }) => {
                             />
                             <label>Class</label>
                             {situation === 'Class' ? (
-                                <p>{sclassesList.find((classItem) => classItem.id === classId)?.name}</p>
+                                <p>{className}</p>
                             ) : (
                                 <select
                                     className="registerInput"

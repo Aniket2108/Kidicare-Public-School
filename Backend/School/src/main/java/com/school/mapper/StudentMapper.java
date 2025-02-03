@@ -27,6 +27,10 @@ public class StudentMapper {
         studentDTO.setFirstName(student.getFirstName());
         studentDTO.setLastName(student.getLastName());
         studentDTO.setDateOfBirth(student.getDateOfBirth());
+        studentDTO.setAadhaarCard(student.getAadhaarCard());
+        studentDTO.setBloodGroup(student.getBloodGroup());
+        studentDTO.setClassId(String.valueOf(student.getMyStandard().getId()));
+
 
         return studentDTO;
     }

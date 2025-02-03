@@ -5,7 +5,7 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-public class StudentDTO {
+public class FatherDTO {
 
     private String firstName;
 
@@ -13,13 +13,16 @@ public class StudentDTO {
 
     private Date dateOfBirth;
 
+    private String mobileNumber;
+
+    private String emailId;
+
     private String aadhaarCard;
 
     private String bloodGroup;
 
-    private String classId;
+    private String occupation;
 
-    private FatherDTO father;
+    private String occupationAddress;
 
-    private MotherDTO mother;
 }

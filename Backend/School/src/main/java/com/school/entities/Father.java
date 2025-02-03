@@ -3,6 +3,7 @@ package com.school.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,8 +31,8 @@ public class Father {
     @Column(name = "emailId", nullable = false)
     private String emailId;
 
-    @Column(name = "aadhaarcar", nullable = false)
-    private String aadhaarcard;
+    @Column(name = "aadhaar_card", nullable = false)
+    private String aadhaarCard;
 
     @Column(name = "blood_group", nullable = false)
     private String bloodGroup;
@@ -44,5 +45,13 @@ public class Father {
 
     // One father can have multiple students
     @OneToMany(mappedBy = "father")
-    private List<Student> students;
+    private List<Student> children = new ArrayList<>();
+
+    public void addChild(Student child){
+        children.add(child);
+    }
+
+    public void deleteChild(Student child){
+        children.remove(child);
+    }
 }

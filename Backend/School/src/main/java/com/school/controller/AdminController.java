@@ -1,5 +1,6 @@
 package com.school.controller;
 
+import com.school.dto.AddStudentDTO;
 import com.school.dto.StandardDTO;
 import com.school.dto.StudentDTO;
 import com.school.dto.TeacherDTO;
@@ -71,9 +72,14 @@ public class AdminController {
     }
 
     @PostMapping(value = "/student")
-    public ResponseEntity<?> addStudent(@RequestBody StudentDTO request){
+    public ResponseEntity<?> addStudent(@RequestBody AddStudentDTO request){
+        StudentDTO studentDTO = studentService.addStudent(request);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(request));
+        if(studentDTO == null){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentDTO);
     }
 
     @GetMapping(value = "/")
