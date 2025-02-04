@@ -30,7 +30,7 @@ public class StudentMapper {
         studentDTO.setAadhaarCard(student.getAadhaarCard());
         studentDTO.setBloodGroup(student.getBloodGroup());
         studentDTO.setClassId(String.valueOf(student.getMyStandard().getId()));
-
+        studentDTO.setRollNum(student.getRollNum());
 
         return studentDTO;
     }

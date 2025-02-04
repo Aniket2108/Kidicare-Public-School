@@ -102,7 +102,16 @@ public class StudentServiceImpl implements StudentService{
     public List<StudentDTO> getAllStudents() {
         List<Student> students = studentRepository.findAll();
 
-        return customStudentMapper.studentsToStudentsDTO(students);
+        List<StudentDTO> studentDTOList = customStudentMapper.studentsToStudentsDTO(students);
+
+        for(int i=0;i<studentDTOList.size();i++){
+
+            studentDTOList.get(i).setFather(fatherMapper.mapFatherToDTO(fatherRepository.findById(students.get(i).getFather().getFatherId()).orElseThrow()));
+            studentDTOList.get(i).setMother(motherMapper.mapMotherToDTO(motherRepository.findById(students.get(i).getMother().getMotherId()).orElseThrow()));
+
+        }
+
+        return studentDTOList;
     }
 
 

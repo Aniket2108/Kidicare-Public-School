@@ -21,6 +21,7 @@ import ShowTeachers from '../TeacherRelated/ShowTeachers/ShowTeachers';
 import AddTeacher from '../TeacherRelated/AddTeacher/AddTeacher';
 import TeacherDetails from '../TeacherRelated/TeacherDetails/TeacherDetails';
 import AddStudent from '../StudentsRelated/AddStudent/AddStudent';
+import ShowStudents from '../StudentsRelated/ShowStudents/ShowStudents';
 
 const AdminDashboard = () => {
     const [open, setOpen] = useState(false);
@@ -100,6 +101,7 @@ const AdminDashboard = () => {
 
                         {/* Student */}
                         <Route path="/Admin/addstudents" element={<AddStudent situation="Student" />} />
+                        <Route path="/Admin/students" element={<ShowStudents />} />
                         
                     </Routes>
                 </Box>

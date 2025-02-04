@@ -19,6 +19,8 @@ public class StudentDTO {
 
     private String classId;
 
+    private Integer rollNum;
+
     private FatherDTO father;
 
     private MotherDTO mother;

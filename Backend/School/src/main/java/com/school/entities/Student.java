@@ -29,6 +29,9 @@ public class Student {
     @Column(name = "blood_group", nullable = false)
     private String bloodGroup;
 
+    @Column(name = "roll_number", nullable = false)
+    private Integer rollNum;
+
     @ManyToOne
     @JoinColumn(name = "class_id")
     private Standard myStandard;

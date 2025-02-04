@@ -4,6 +4,8 @@ import com.school.dto.MotherDTO;
 import com.school.entities.Mother;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class MotherMapper {
 
@@ -26,4 +28,21 @@ public class MotherMapper {
     }
 
 
+    public MotherDTO mapMotherToDTO(Mother mother) {
+
+        MotherDTO motherDTO = new MotherDTO();
+
+        motherDTO.setFirstName(mother.getFirstName());
+        motherDTO.setLastName(mother.getLastName());
+        motherDTO.setMobileNumber(mother.getMobileNumber());
+        motherDTO.setBloodGroup(mother.getBloodGroup());
+        motherDTO.setAadhaarCard(mother.getAadhaarCard());
+        motherDTO.setOccupation(mother.getOccupation());
+        motherDTO.setOccupationAddress(mother.getOccupationAddress());
+        motherDTO.setEmailId(mother.getEmailId());
+        motherDTO.setDateOfBirth(mother.getDateOfBirth());
+
+        return motherDTO;
+
+    }
 }
