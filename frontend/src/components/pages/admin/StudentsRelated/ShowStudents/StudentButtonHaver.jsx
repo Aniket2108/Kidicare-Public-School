@@ -55,30 +55,36 @@ const StudentButtonHaver = ({ row, deleteHandler }) => {
                         {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
                     </BlackButton>
                 </ButtonGroup>
-                <Popper open={open} anchorEl={anchorRef.current} transition disablePortal>
-                    {({ TransitionProps, placement }) => (
-                        <Grow
-                            {...TransitionProps}
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                        >
-                            <Paper>
-                                <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList autoFocusItem>
-                                        {options.map((option, index) => (
-                                            <MenuItem
-                                                key={option}
-                                                selected={index === selectedIndex}
-                                                onClick={(event) => handleMenuItemClick(event, index)}
-                                            >
-                                                {option}
-                                            </MenuItem>
-                                        ))}
-                                    </MenuList>
-                                </ClickAwayListener>
-                            </Paper>
-                        </Grow>
-                    )}
-                </Popper>
+                <Popper 
+    open={open} 
+    anchorEl={anchorRef.current} 
+    transition 
+    disablePortal
+    sx={{ zIndex: 1300 }} // Add this line to bring the popper forward
+>
+    {({ TransitionProps, placement }) => (
+        <Grow
+            {...TransitionProps}
+            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+        >
+            <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList autoFocusItem>
+                        {options.map((option, index) => (
+                            <MenuItem
+                                key={option}
+                                selected={index === selectedIndex}
+                                onClick={(event) => handleMenuItemClick(event, index)}
+                            >
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </MenuList>
+                </ClickAwayListener>
+            </Paper>
+        </Grow>
+    )}
+</Popper>
             </React.Fragment>
         </>
     );

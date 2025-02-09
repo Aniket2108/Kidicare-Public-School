@@ -65,6 +65,7 @@ public class StudentServiceImpl implements StudentService{
         Student s1 = studentRepository.save(student);
         father.addChild(student);
         mother.addChild(student);
+        standard.addStudent(student);
         return (mapper.map(s1,StudentDTO.class));
 
     }
@@ -92,6 +93,7 @@ public class StudentServiceImpl implements StudentService{
         student.setMother(motherEntity);
         student.setMyStandard(standard);
         Student s1 = studentRepository.save(student);
+        standard.addStudent(student);
         return (mapper.map(s1,StudentDTO.class));
     }
 
@@ -112,6 +114,19 @@ public class StudentServiceImpl implements StudentService{
         }
 
         return studentDTOList;
+    }
+
+    @Override
+    public StudentDTO getStudentById(Integer id) {
+
+        Student studentEntity = studentRepository.findById(id).orElseThrow();
+
+        StudentDTO studentDTO = customStudentMapper.mapStudentToDTO(studentEntity);
+
+        studentDTO.setFather(fatherMapper.mapFatherToDTO(studentEntity.getFather()));
+        studentDTO.setMother(motherMapper.mapMotherToDTO(studentEntity.getMother()));
+
+        return studentDTO;
     }
 
 

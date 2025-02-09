@@ -1,0 +1,25 @@
+.details-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.styled-button {
+    margin: 20px;
+    background-color: #02250b;
+}
+
+.styled-button:hover {
+    background-color: #106312;
+}
+
+@media (max-width: 768px) {
+    .details-container {
+        padding: 10px;
+    }
+
+    .styled-button {
+        width: 100%;
+    }
+}

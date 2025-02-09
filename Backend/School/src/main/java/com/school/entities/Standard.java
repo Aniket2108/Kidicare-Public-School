@@ -3,6 +3,7 @@ package com.school.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,16 @@ public class Standard {
 
     @OneToMany(mappedBy = "myStandard",cascade = CascadeType.ALL,
             orphanRemoval = true/* ,fetch=FetchType.EAGER */)
-    List<Student> students;
+    private List<Student> students = new ArrayList<>();
 
+    @OneToMany(mappedBy = "standard", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Subject> subjects = new ArrayList<>();
+
+    public void addStudent(Student student){
+        students.add(student);
+    }
+
+    public void deleteStudent(Student student){
+        students.remove(student);
+    }
 }

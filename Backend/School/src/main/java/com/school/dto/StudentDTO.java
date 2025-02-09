@@ -7,6 +7,8 @@ import java.sql.Date;
 @Data
 public class StudentDTO {
 
+    private Integer id;
+
     private String firstName;
 
     private String lastName;

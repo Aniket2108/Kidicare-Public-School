@@ -10,4 +10,6 @@ public interface StudentService {
     StudentDTO addStudent(AddStudentDTO request);
 
     List<StudentDTO> getAllStudents();
+
+    StudentDTO getStudentById(Integer id);
 }

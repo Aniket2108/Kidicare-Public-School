@@ -18,12 +18,6 @@ import StudentButtonHaver from './StudentButtonHaver';
 import axios from 'axios';
 import { serverUrl } from '../../../../data/Data';
 
-// Mock data for students
-const mockStudents = [
-    { _id: '1', name: 'Alice Johnson', rollNum: '101', sclassName: { sclassName: 'Grade 10' } },
-    { _id: '2', name: 'Bob Smith', rollNum: '102', sclassName: { sclassName: 'Grade 9' } },
-    { _id: '3', name: 'Charlie Brown', rollNum: '103', sclassName: { sclassName: 'Grade 8' } }
-];
 
 const ShowStudents = () => {
     const navigate = useNavigate();
@@ -31,15 +25,17 @@ const ShowStudents = () => {
     const [loading, setLoading] = useState(true);
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState("");
+    const [classes, setClasses] = useState([]);
 
     useEffect(() => {
         const fetchStudents = async () => {
             try {
                 setLoading(true);
                 const response = await axios.get(`${serverUrl}/admin/`);
-    
+                const classes = await axios.get(`${serverUrl}/standard/`);
                 // Assuming response.data contains the student list
                 setStudentsList(response.data || []);
+                setClasses(classes.data || []);
             } catch (error) {
                 console.error("Error fetching students:", error);
                 setMessage("Failed to fetch students.");
@@ -66,9 +62,10 @@ const ShowStudents = () => {
     const studentRows = studentsList.map((student) => ({
         name: `${student.firstName} ${student.lastName}`,
         rollNum: student.rollNum,
-        // sclassName: student.sclassName.sclassName,
+        sclassName: classes.find((classItem) => classItem.id === Number(student.classId))?.name,
         id: student.id,
     }));
+
 
     const actions = [
         {

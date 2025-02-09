@@ -1,14 +1,8 @@
 package com.school.controller;
 
-import com.school.dto.AddStudentDTO;
-import com.school.dto.StandardDTO;
-import com.school.dto.StudentDTO;
-import com.school.dto.TeacherDTO;
+import com.school.dto.*;
 import com.school.request.AdminLoginRequest;
-import com.school.services.AdminService;
-import com.school.services.StandardService;
-import com.school.services.StudentService;
-import com.school.services.TeacherService;
+import com.school.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +25,9 @@ public class AdminController {
 
     @Autowired
     private StandardService standardService;
+
+    @Autowired
+    private SubjectService subjectService;
 
     @PostMapping(value = "/teacher")
     public ResponseEntity<?> addTeacher(@RequestBody TeacherDTO request){
@@ -119,6 +116,18 @@ public class AdminController {
     @GetMapping(value =  "/teacher/{id}")
     public ResponseEntity<?> getTeacherById(@PathVariable String id){
         return ResponseEntity.status(HttpStatus.OK).body(teacherService.getTeacherById(Integer.parseInt(id)));
+    }
+
+    @PostMapping(value = "/subject")
+    public ResponseEntity<?> addSubject(@RequestBody SubjectDTO subjectDTO){
+
+        SubjectDTO subjectResponseDTO = subjectService.addSubject(subjectDTO);
+
+        if( subjectResponseDTO != null ){
+            return ResponseEntity.status(HttpStatus.CREATED).body(subjectResponseDTO);
+        }
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
 }

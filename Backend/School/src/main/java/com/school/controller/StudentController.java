@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/student")
 public class StudentController {
 
+    @Autowired
+    private StudentService studentService;
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getStudentById(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentById(Integer.parseInt(id)));
+    }
 
 }
