@@ -35,16 +35,4 @@ public class TeacherController {
 
     }
 
-    @PostMapping(value = "/subject")
-    public ResponseEntity<?> addSubject(@RequestBody SubjectDTO subjectDTO){
-
-        SubjectDTO subjectResponseDTO = subjectService.addSubject(subjectDTO);
-
-        if( subjectResponseDTO != null ){
-            return ResponseEntity.status(HttpStatus.CREATED).body(subjectResponseDTO);
-        }
-
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
-    }
-
 }

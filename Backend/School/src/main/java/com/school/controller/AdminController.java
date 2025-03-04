@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/admin")
@@ -119,15 +121,14 @@ public class AdminController {
     }
 
     @PostMapping(value = "/subject")
-    public ResponseEntity<?> addSubject(@RequestBody SubjectDTO subjectDTO){
+    public ResponseEntity<?> addSubjects(@RequestBody AddSubjectDTO subjects){
 
-        SubjectDTO subjectResponseDTO = subjectService.addSubject(subjectDTO);
-
-        if( subjectResponseDTO != null ){
-            return ResponseEntity.status(HttpStatus.CREATED).body(subjectResponseDTO);
+        if (subjects == null || subjects.getSubjects() == null) {
+            return ResponseEntity.badRequest().body("Invalid request: subjects are null");
         }
+        subjectService.addSubjects(subjects);
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        return null;
     }
 
 }

@@ -19,6 +19,9 @@ public class Subject {
     @Column(name = "subject_code")
     private String subjectCode;
 
+    @Column(name = "sessions")
+    private Integer sessions;
+
     @ManyToOne
     @JoinColumn(name = "standard_id")
     private Standard standard;

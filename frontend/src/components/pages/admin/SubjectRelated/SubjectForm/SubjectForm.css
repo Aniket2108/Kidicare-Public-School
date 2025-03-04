@@ -1,0 +1,39 @@
+.subject-form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+    text-align: center;
+}
+
+.subject-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .subject-form {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .subject-actions {
+        justify-content: center;
+    }
+
+    .form-actions {
+        justify-content: center;
+    }
+}

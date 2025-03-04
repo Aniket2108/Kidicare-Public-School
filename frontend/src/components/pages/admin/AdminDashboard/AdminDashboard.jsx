@@ -23,6 +23,7 @@ import TeacherDetails from '../TeacherRelated/TeacherDetails/TeacherDetails';
 import AddStudent from '../StudentsRelated/AddStudent/AddStudent';
 import ShowStudents from '../StudentsRelated/ShowStudents/ShowStudents';
 import ViewStudent from '../StudentsRelated/ViewStudent/ViewStudent';
+import SubjectForm from '../SubjectRelated/SubjectForm/SubjectForm';
 
 const AdminDashboard = () => {
     const [open, setOpen] = useState(false);
@@ -104,6 +105,11 @@ const AdminDashboard = () => {
                         <Route path="/Admin/addstudents" element={<AddStudent situation="Student" />} />
                         <Route path="/Admin/students" element={<ShowStudents />} />
                         <Route path="/Admin/students/student/:id" element={<ViewStudent />} />
+
+
+                        {/* Subject */}
+                        <Route path="/Admin/addsubject/:id" element={<SubjectForm />} />
+                        
                         
                     </Routes>
                 </Box>
